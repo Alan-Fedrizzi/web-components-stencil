@@ -13,7 +13,7 @@ export namespace Components {
     interface UcSideDrawer {
         "open": () => Promise<void>;
         "opened": boolean;
-        "title": string;
+        "sideDrawerTitle": string;
     }
     interface UcSpinner {
     }
@@ -83,7 +83,7 @@ declare namespace LocalJSX {
     }
     interface UcSideDrawer {
         "opened"?: boolean;
-        "title"?: string;
+        "sideDrawerTitle"?: string;
     }
     interface UcSpinner {
     }
