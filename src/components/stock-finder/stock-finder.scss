@@ -1,0 +1,84 @@
+:host {
+  // ele setou as custom properties no arquivo html, <style> html { --color:...
+  --color: #680068;
+  --color-text: #eee;
+  --color-hover: #8b008b;
+  --color-disabled: #333;
+  --color-grey: #ccc;
+  --transition: all 0.2s ease-out;
+  // by default, components are inline
+  display: block;
+  // se deixar inline, o border fica estragado
+  font-family: sans-serif;
+  border: 2px solid var(--color);
+  margin: 2rem;
+  padding: 1rem;
+  width: 20rem;
+  max-width: 100%;
+}
+
+.stock-finder {
+  &__input {
+    display: block;
+    color: var(--color);
+    font: inherit;
+    padding: 0.1rem 0.25rem;
+    margin-bottom: 0.5rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    font: inherit;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--color);
+    background: var(--color);
+    color: var(--color-text);
+    transition: var(--transition);
+
+    &:hover,
+    &:active {
+      background: var(--color-hover);
+      border-color: var(--color-hover);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    // &:disabled { poderíamos selecionar dessa forma tb
+    &[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed; // fica um proibido qd hover o botão
+      // pointer-events: none;
+      background: var(--color-disabled);
+      border-color: var(--color-disabled);
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    margin: 0.25rem 0;
+    padding: 0.25rem;
+    border: 1px solid var(--color-grey);
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover,
+    &:active {
+      background-color: var(--color-grey);
+    }
+  }
+
+  &__symbol {
+    font-weight: 600;
+  }
+}

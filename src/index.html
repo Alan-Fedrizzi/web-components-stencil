@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      /* via slot, não conseguimos estilizar o que está aninhado dentro do nav, temos que fazer no light DOM */
+      .side-nav ul {
+        list-style: none;
+      }
+
+      .side-nav li {
+        margin: 1rem 0;
+      }
+
+      .side-nav a {
+        text-decoration: none;
+        color: #000;
+      }
+    </style>
+
+    <script type="module" src="/build/web-components-stencil.esm.js"></script>
+    <script nomodule src="/build/web-components-stencil.js"></script>
+  </head>
+  <body>
+    <button id="side-drawer-btn">Open Side Menu</button>
+
+    <uc-side-drawer title="Main Menu">
+      <!-- via slot, não conseguimos estilizar o que está aninhado dentro do nav, temos que fazer no light DOM -->
+      <nav class="side-nav">
+        <ul>
+          <li>
+            <a href="">A Link</a>
+          </li>
+          <li>
+            <a href="">Another Link</a>
+          </li>
+          <li>
+            <a href="">A third Link</a>
+          </li>
+        </ul>
+      </nav>
+    </uc-side-drawer>
+
+    </br>
+    </br>
+
+    <my-tooltip text="We built this before. Now it's better!">
+      <p slot="label">
+        Let's test this New Tolltip!
+      </p>
+    </my-tooltip>
+
+    </br>
+    </br>
+
+    <p>Let's test this new <uc-tooltip text="We built this before. Now it's better!">Tooltip!</uc-tooltip> </p>
+
+    </br>
+    </br>
+
+    <!-- stockSymbol não é válido aqui, html não é case sensitive -->
+    <uc-stock-price stock-symbol="AAPL"></uc-stock-price>
+
+    <uc-stock-finder></uc-stock-finder>
+
+    <uc-spinner></uc-spinner>
+
+    <script>
+      const sideDrawer = document.querySelector('uc-side-drawer');
+      /*
+      // testar a mudança do atributo title
+      setTimeout(() => {
+        sideDrawer.title = 'It changed!'; //  não muda o atributo no html, só muda se colocar { reflect: true } no Prop
+        // sideDrawer.setAttribute('title', 'It changed!'); muda o atributo no html
+      }, 3_000);
+      */
+
+      const sideDrawerButton = document.getElementById('side-drawer-btn');
+      sideDrawerButton.addEventListener('click', () => {
+        if (!sideDrawer.opened) {
+          // sideDrawer.setAttribute('open', '');
+          // ou
+          // sideDrawer.open = true;
+          // ou podemos abrir ela com um método
+          sideDrawer.open();
+        }
+      });
+
+      // stock-price / stock-finder
+      const stockFinderEl = document.querySelector('uc-stock-finder');
+      // vamos escutar o nosso custom event
+      stockFinderEl.addEventListener('ucSymbolSelected', (event) => {
+        console.log(event);
+      })
+    </script>
+  </body>
+</html>
