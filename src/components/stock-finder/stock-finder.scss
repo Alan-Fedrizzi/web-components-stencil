@@ -1,5 +1,4 @@
 :host {
-  // ele setou as custom properties no arquivo html, <style> html { --color:...
   --color: #680068;
   --color-text: #eee;
   --color-hover: #8b008b;
@@ -8,7 +7,6 @@
   --transition: all 0.2s ease-out;
   // by default, components are inline
   display: block;
-  // se deixar inline, o border fica estragado
   font-family: sans-serif;
   border: 2px solid var(--color);
   margin: 2rem;
@@ -49,11 +47,9 @@
       outline: none;
     }
 
-    // &:disabled { poderíamos selecionar dessa forma tb
     &[disabled] {
       opacity: 0.5;
-      cursor: not-allowed; // fica um proibido qd hover o botão
-      // pointer-events: none;
+      cursor: not-allowed;
       background: var(--color-disabled);
       border-color: var(--color-disabled);
     }

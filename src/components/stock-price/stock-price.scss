@@ -6,7 +6,6 @@
   --color-warning: #ff4500;
   // by default, components are inline
   display: block;
-  // se deixar inline, o border fica estragado
   font-family: sans-serif;
   border: 2px solid var(--color);
   margin: 2rem;
@@ -51,11 +50,9 @@
       outline: none;
     }
 
-    // &:disabled { poderíamos selecionar dessa forma tb
     &[disabled] {
       opacity: 0.5;
-      cursor: not-allowed; // fica um proibido qd hover o botão
-      // pointer-events: none;
+      cursor: not-allowed;
       background: var(--color-disabled);
       border-color: var(--color-disabled);
     }

@@ -10,7 +10,6 @@
         font-family: sans-serif;
       }
 
-      /* via slot, não conseguimos estilizar o que está aninhado dentro do nav, temos que fazer no light DOM */
       .side-nav ul {
         list-style: none;
       }
@@ -32,7 +31,6 @@
     <button id="side-drawer-btn">Open Side Menu</button>
 
     <uc-side-drawer title="Main Menu">
-      <!-- via slot, não conseguimos estilizar o que está aninhado dentro do nav, temos que fazer no light DOM -->
       <nav class="side-nav">
         <ul>
           <li>
@@ -65,7 +63,6 @@
     </br>
     </br>
 
-    <!-- stockSymbol não é válido aqui, html não é case sensitive -->
     <uc-stock-price stock-symbol="AAPL"></uc-stock-price>
 
     <uc-stock-finder></uc-stock-finder>
@@ -74,28 +71,15 @@
 
     <script>
       const sideDrawer = document.querySelector('uc-side-drawer');
-      /*
-      // testar a mudança do atributo title
-      setTimeout(() => {
-        sideDrawer.title = 'It changed!'; //  não muda o atributo no html, só muda se colocar { reflect: true } no Prop
-        // sideDrawer.setAttribute('title', 'It changed!'); muda o atributo no html
-      }, 3_000);
-      */
 
       const sideDrawerButton = document.getElementById('side-drawer-btn');
       sideDrawerButton.addEventListener('click', () => {
         if (!sideDrawer.opened) {
-          // sideDrawer.setAttribute('open', '');
-          // ou
-          // sideDrawer.open = true;
-          // ou podemos abrir ela com um método
           sideDrawer.open();
         }
       });
 
-      // stock-price / stock-finder
       const stockFinderEl = document.querySelector('uc-stock-finder');
-      // vamos escutar o nosso custom event
       stockFinderEl.addEventListener('ucSymbolSelected', (event) => {
         console.log(event);
       })

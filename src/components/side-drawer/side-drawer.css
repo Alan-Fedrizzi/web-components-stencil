@@ -11,7 +11,6 @@ aside {
   z-index: 100;
 }
 
-/* se fosse scoped: true, teríamos que usar: uc-side-drawer[open] aside {} */
 :host([opened]) aside {
   left: 0;
 }

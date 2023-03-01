@@ -9,51 +9,35 @@ import { AV_API_KEY } from '../../global/global';
 export class StockFinder {
   stockNameInput: HTMLInputElement;
 
-  // vamosinicializar com um empity array, para ser um array e não undefined qd carrega a página (chamamos o .map nessa proprieadede no web component)
   @State() searchResults: { symbol: string; name: string }[] = [];
-
-  // spinner
   @State() loading = false;
 
-  // custom events
-  // vai emitir uma string, que será o nome o symbol
   @Event({ bubbles: true, composed: true }) ucSymbolSelected: EventEmitter<string>;
 
   onFindStocks(event: Event) {
     event.preventDefault();
-    // spinner
     this.loading = true;
 
     const stockName = this.stockNameInput.value;
-    // request api
     fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${stockName}&apikey=${AV_API_KEY}`)
       .then(res => res.json())
       .then(parsedRes => {
-        // console.log(parsedRes['bestMatches']);
         this.searchResults = parsedRes['bestMatches'].map(match => {
           return { symbol: match['1. symbol'], name: match['2. name'] };
         });
-        // console.log(this.searchResults);
-
-        // spinner
         this.loading = false;
       })
       .catch(err => {
         console.log(err);
-        // spinner
         this.loading = false;
       });
   }
 
-  // vamos fazer que qd clica em algum item da lista, emite um custom event e atualiza o preço automaticamente
   onSelectSymbol(symbol: string) {
-    // vamos emitir nosso custom event aqui, com o symbol
     this.ucSymbolSelected.emit(symbol);
   }
 
-  // é um método do stencil, retorna um objeto com informações da tag do custom element
   hostData() {
-    // coloca essa classe qd renderiza o web component
     return { class: 'stock-finder' };
   }
 
@@ -80,7 +64,6 @@ export class StockFinder {
           Find
         </button>
       </form>,
-      // lista dos resultados ou spinner
       content,
     ];
   }
